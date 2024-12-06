@@ -1,0 +1,242 @@
+---
+title: "Analyzing the Phenology of Eelgrass (*Zostera marina*) in the Great Bay Estuary"
+author: "Trevor Mattera"
+format: pdf
+mainfont: "Calibri"
+geometry:
+- top=25.4mm
+- left=25.4mm
+- right=25.4mm
+- bottom=25.4mm
+editor: visual
+---
+
+## Abstract
+
+Eelgrass (*Zostera marina L.*) flowering development and timing and seed production were surveyed at five sites within the Great Bay Estuary from May to October 2024 to determine when and where would be the most promising sites for the effective harvest of seeds for restoration purposes. The two coastal sites surveyed showed peaks of successive flowering stages with proportions of fruiting spathes nearing 50% in late July and early August, which coincided with peaks of seeds per shoot that were higher than the three sites within Great Bay proper. In contrast, the Great Bay sites showed less synchronous successive flowering, with proportions of stages staying more consistent across the survey period, and smaller peaks of flowing development generally occurring later in the year than the coastal sites. Additionally, two of the three Great Bay sites contained fewer seeds per shoot during their peaks in late September through early October than the coastal sites. These results support focusing harvesting efforts on coastal sites in the late July/early August period.
+
+## Introduction
+
+As the dominant species of seagrass in New England, eelgrass (*Zostera marina L.*) is a cornerstone of healthy estuaries in our region. Forming dense, subtidal meadows, eelgrass provides numerous habitat and water quality benefits to its ecosystem, including serving as nurseries for young fish and shellfish (Lefcheck et al. 2019; Thayer et al. 1984) as well as removing nutrients and sediments from the water column (Sandoval-Gil et al. 2016; Short and Short 1984). Unfortunately, eelgrass meadows have been experiencing significant declines globally over the last century (Dunic et al. 2021). In the Great Bay Estuary, total eelgrass acreage in 2023 had declined by 64% from its peak in 1996 due to record precipitation that year greatly reducing water quality during the growing season (PREP 2023; Routhier et al. 2024).
+
+Restoration efforts aimed at slowing or reversing losses of eelgrass have often been based on different techniques of transplanting adult shoots from healthy donor beds to restoration sites (Fonseca 1998; Calumpong and Fonseca 2001). Yet such efforts can be costly and difficult to scale up, potentially limiting their success (van Katwijk et al. 2016). To address this challenge, restoration professionals in this region have taken an interest in trying to reproduce the success of large-scale eelgrass seeding efforts, such as the ones seen in Virginia’s estuaries (e.g., Orth et al. 2020). A seed-based restoration technique, however, brings with it its own set of challenges. For instance, unlike harvesting adult eelgrass shoots that can be done throughout the summer, harvesting eelgrass seeds needs to be done during a very narrow window of time, after a meadow has flowered and pollinated but before its seeds have dispersed. This window of time may only be a few weeks long, and different beds in an estuary can flower at different times depending on the environmental conditions they are experiencing (De Cock 1980; Phillips et al. 1983; Silberhorn et al. 1983). Therefore, to improve the chances of successful harvests and maximize seed yields, it is critical to know how different areas in an estuary and potential donor beds behave.
+
+***Objectives***
+
+To support that need, the objectives of this study were to 1) determine and differentiate when beds in the Great Bay Estuary were flowering and fruiting, and 2) identify sites that had the highest seed production.
+
+## Methods
+
+***Data collection***
+
+A pilot phenology survey was conducted in the Great Bay Estuary from May to October 2024. Five sites were surveyed during this period, two on the coast (NCB and FSB) and three within Great Bay (FPT, NSGNB, and FMI; Fig. 1). Sites were selected in the spring based on ease of access, as well as on historical eelgrass presence and density. Sites were visited every two weeks, and five (5) reproductive shoots were collected per site. To ensure independence of samples, all collected shoots were at least 1m apart.
+
+![Map of the Great Bay Estuary, NH. Phenology sites are labeled with yellow dots.](Pheno%20Map.png)
+
+Spathes (flowers) on reproductive shoots were ranked based on the maturity stage 0-6 described in De Cock (1980). These stages of development are generally sequential. Stage 0 represented fully developed spathes that had not begun anthesis. Stage 1 represented spathes where the styles of the female pistils had emerged ready for pollination. Stage 2 represented spathes showing a bending back of styles after pollination. Stage 3 represented the flowering of the male anthers and release of pollen. Stage 4 represented spathes containing developed, fertilized seeds. Stage 5 represented spathes during active seed release. And Stage 6 represented fully expended spathes. For this study, two additional stages were also included: Stage “3.5” was used for spathes that had released pollen but whose seeds had not yet begun to develop (between Stage 3 and 4) and PS (pre-spathe) was used for spathes that were present but had not yet fully developed pistils and anthers. Spathes whose stage could not be determined due to factors such as breakage or rot were labeled “unk.” The number of seeds per spathe was counted for spathes of Stages 3.5, 4, and 5.
+
+***Data analysis***
+
+Data recorded on field sheets in wide form was transcribed to a .csv file in long form for ease of analysis using R version 4.3.2 (R Core Team 2023). As we are interested in conditions across an entire field season and how those conditions develop, all of our analyses are constructed as time series plots utilizing R packages such as ggplot2 and lubridate. For each site individually, the proportion of spathes at each developmental stage on each reproductive shoot were plotted over time. Additionally, the total number of seeds per shoot of all sites were plotted over time. These scatter plots had LOESS smooth best fit lines added to better visualize developmental patterns.
+
+## Results
+
+The two coastal sites, FSB and NCB (Fig. 2 & 3), show clear patterns of peaks of successive spathe development over time. Specifically, the data suggest early pre-spathe (PS) and Stage 0 flowers in proportions of 50% and greater in the May and early June time frame that taper off later into June. Peaks of active flowering and pollination (stages 1 to 3) are not as prominent, but can still be seen in mid-June and early July. Later developmental stages are then seen as very distinct peaks of Stages 3.5 (early seeds), 4 (mature seeds), and 5 (dropping seeds) throughout July, early August, and mid-August respectively.
+
+In contrast, the Great Bay sites, FMI, FPT, & NSGNB (Fig. 4-6), while displaying some clear peaks of high proportions of spathes in different stages, seem to lack a synchronized and sequential pattern of development. For example, at FPT (Fig. 5), we see peaks of Stage 1 spathes followed by Stage 2 spathes in the beginning of Aug before another peak of Stage 0 spathes as it nears September. And at NSGNB (Fig. 6), we see many consistent proportions of stages throughout the sampling time. However, while not as prominent as the coastal sites, the Great Bay sites still demonstrate this pattern of successive peaks, albeit muted. The Stage 2 peak at FPT in early Aug is followed by a peak of 3.5 in early September and one of Stage 4 in early Oct. This highlights how much later in the year that these developmental stages are occurring in Great Bay, with seeds developing and releasing well into the fall.
+
+```{r warning=FALSE, message=FALSE}
+#| echo: false
+#| fig-cap: 
+#| - "Proportions of spathes (flowers) at different stages per reproductive shoot at the coastal FSB site from May to August 2024. Points represent the proportions of spathes at specific stages among all spathes on a single reproductive shoot. Lines are LOESS smooth lines."
+#| - "Proportions of spathes (flowers) at different stages per reproductive shoot at the coastal NCB site from May to September 2024. Points represent the proportions of spathes at specific stages among all spathes on a single reproductive shoot. Lines are LOESS smooth lines."
+#| - "Proportions of spathes (flowers) at different stages per reproductive shoot at the Great Bay FMI site from June to October 2024. Points represent the proportions of spathes at specific stages among all spathes on a single reproductive shoot. Lines are LOESS smooth lines."
+#| - "Proportions of spathes (flowers) at different stages per reproductive shoot at the Great Bay FPT site from June to October 2024. Points represent the proportions of spathes at specific stages among all spathes on a single reproductive shoot. Lines are LOESS smooth lines."
+#| - "Proportions of spathes (flowers) at different stages per reproductive shoot at the Great Bay NSGNB site from June to October 2024. Points represent the proportions of spathes at specific stages among all spathes on a single reproductive shoot. Lines are LOESS smooth lines."
+
+#LOAD PACKAGES & DATA
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(forcats)
+Pheno_dat <- read.csv("C:/Users/tmatt/Desktop/BIOL806_Phenology_GBE_2024.csv")
+
+#WRANGLE DATA
+Pheno_dat$DateCollected <- ymd(Pheno_dat$DateCollected)
+Pheno_dat$Site <- as.factor(Pheno_dat$Site)
+Pheno_dat$ReproShootID <- as.factor(Pheno_dat$ReproShootID)
+Pheno_dat$RhipidiumNumber <- as.factor(Pheno_dat$RhipidiumNumber)
+Pheno_dat$SpatheStage <- as.factor(Pheno_dat$SpatheStage)
+Pheno_dat$Seeds <- as.numeric(Pheno_dat$Seeds)
+
+Pheno_dat <- Pheno_dat %>% 
+  mutate(SpatheStage = fct_relevel(SpatheStage,"PS","0","1","2","3",
+                                   "3.5","4","5","6","unk"))
+
+#PROPORTION OF FLOWER STAGES OVER TIME PER SITE
+#We're translating the data to show the proportion of flowers of different 
+#stages per reproductive shoot to better see peaks of stages over time.
+
+FMI_Flw <- Pheno_dat %>% 
+  filter(Site == 'FMI') %>% 
+  count(DateCollected,ReproShootID,SpatheStage) %>% 
+  mutate(DateID = paste(DateCollected,ReproShootID,sep = "_")) %>% 
+  mutate(Prop = prop.table(n), .by = DateID)
+
+FPT_Flw <- Pheno_dat %>% 
+  filter(Site == 'FPT') %>% 
+  count(DateCollected,ReproShootID,SpatheStage) %>% 
+  mutate(DateID = paste(DateCollected,ReproShootID,sep = "_")) %>% 
+  mutate(Prop = prop.table(n), .by = DateID)
+
+FSB_Flw <- Pheno_dat %>% 
+  filter(Site == 'FSB') %>% 
+  count(DateCollected,ReproShootID,SpatheStage) %>% 
+  mutate(DateID = paste(DateCollected,ReproShootID,sep = "_")) %>% 
+  mutate(Prop = prop.table(n), .by = DateID)
+
+NCB_Flw <- Pheno_dat %>% 
+  filter(Site == 'NCB') %>% 
+  count(DateCollected,ReproShootID,SpatheStage) %>% 
+  mutate(DateID = paste(DateCollected,ReproShootID,sep = "_")) %>% 
+  mutate(Prop = prop.table(n), .by = DateID)
+
+NSGNB_Flw <- Pheno_dat %>% 
+  filter(Site == 'NSGNB') %>% 
+  count(DateCollected,ReproShootID,SpatheStage) %>% 
+  mutate(DateID = paste(DateCollected,ReproShootID,sep = "_")) %>% 
+  mutate(Prop = prop.table(n), .by = DateID)
+
+#THE PLOTS 
+ggplot(data = FSB_Flw, aes(x=DateCollected, y=Prop, colour=SpatheStage)) +
+  geom_point(size=1) +
+  geom_smooth(se = FALSE) +
+  xlab("Month") +
+  ylab("Proportion") +
+  labs(color = 'Spathe Stage') +
+  theme_classic() +
+  ggtitle("FSB (Coastal) Flower Stages Over Time")
+
+ggplot(data = NCB_Flw, aes(x=DateCollected, y=Prop, colour=SpatheStage)) +
+  geom_point(size=1) +
+  geom_smooth(se = FALSE) +
+  xlab("Month") +
+  ylab("Proportion") +
+  labs(color = 'Spathe Stage') +
+  theme_classic() +
+  ggtitle("NCB (Coastal) Flower Stages Over Time")
+
+ggplot(data = FMI_Flw, aes(x=DateCollected, y=Prop, colour=SpatheStage)) +
+  geom_point(size=1) +
+  geom_smooth(se = FALSE) +
+  xlab("Month") +
+  ylab("Proportion") +
+  labs(color = 'Spathe Stage') +
+  theme_classic() +
+  ggtitle("FMI (Great Bay) Flower Stages Over Time")
+
+ggplot(data = FPT_Flw, aes(x=DateCollected, y=Prop, colour=SpatheStage)) +
+  geom_point(size=1) +
+  geom_smooth(se = FALSE) +
+  xlab("Month") +
+  ylab("Proportion") +
+  labs(color = 'Spathe Stage') +
+  theme_classic() +
+  ggtitle("FPT (Great Bay) Flower Stages Over Time")
+
+ggplot(data = NSGNB_Flw, aes(x=DateCollected, y=Prop, colour=SpatheStage)) +
+  geom_point(size=1) +
+  geom_smooth(se = FALSE) +
+  xlab("Month") +
+  ylab("Proportion") +
+  labs(color = 'Spathe Stage') +
+  theme_classic() +
+  ggtitle("NSGNB (Great Bay) Flower Stages Over Time")
+```
+
+When plotting the numbers of seeds per reproductive shoots over time (Fig. 7), three sites stand out: the two coastal sites, FSB and NCB, as well as NSGNB in Great Bay. These three sites appear to have significant increases of seeds that peak around August and then decrease sharply going into September. The other two Great Bay sites, FMI and FPT, appear to have lower and consistently flat levels of seeds per shoot throughout the sampling period. However, this analysis includes counts from Stage 3.5 spathes, which contain undeveloped seeds, and generally have more on average than Stage 4 as nonviable seeds have not yet been aborted. Therefore, this graph better represents reproductive potential as opposed to viable seed production.
+
+```{r warning=FALSE, message=FALSE}
+#| echo: false
+#| fig-cap: 
+#| - "Number of seeds counted in Stage 3.5, 4, and 5 spathes across all sites over time. Points represent the total number of seeds per reproductive shoot. Lines are LOESS smooth lines."
+
+#NUMBER OF SEEDS AT EACH SITE OVER TIME
+GBEseeds <- Pheno_dat %>% 
+  drop_na(Seeds) %>% 
+  group_by(DateCollected,Site,ReproShootID) %>% 
+  summarise(TotSeeds = sum(Seeds))
+
+ggplot(data = GBEseeds, aes(x=DateCollected, y=TotSeeds,colour=Site)) +
+  geom_point(size=1) +
+  geom_smooth(se = FALSE) +
+  xlab("Month") +
+  ylab("Seeds per shoot") +
+  labs(color = 'Site') +
+  theme_classic() +
+  ggtitle("Total number of potential seeds over time")
+```
+
+```{r warning=FALSE, message=FALSE}
+#| echo: false
+#| fig-cap: 
+#| - "Number of developed seeds counted in Stage 4 and 5 spathes across all sites over time. Points represent the total number of seeds per reproductive shoot. Lines are LOESS smooth lines."
+
+#NUMBER OF *DEVELOPED* SEEDS AT EACH SITE OVER TIME
+GBEseeds_no35s <- Pheno_dat %>% 
+  drop_na(Seeds) %>% 
+  filter(SpatheStage=='4'|SpatheStage=='5') %>% 
+  group_by(DateCollected,Site,ReproShootID) %>% 
+  summarise(TotSeeds = sum(Seeds))
+
+ggplot(data = GBEseeds_no35s, aes(x=DateCollected, y=TotSeeds,colour=Site)) +
+  geom_point(size=1) +
+  geom_smooth(se = FALSE) +
+  xlab("Month") +
+  ylab("Seeds per shoot") +
+  labs(color = 'Site') +
+  theme_classic() +
+  ggtitle("Total number of developed seeds over time")
+```
+
+Removing Stage 3.5 from the analysis and simply showing Stages 4 and 5 gives a better representation of the levels of pollinated and viable seeds being produced at these sites (Fig. 8). We see that we retain peaks of developed seeds at our coastal sites in August. However, the significant peak seen at NSGNB appears to disappear and flatten out. A noticeable peak of viable seeds is also seen at FPT in October, later than all the other sites.
+
+## Discussion
+
+A phenology survey of eelgrass in the Great Bay Estuary showed coastal sites flowering similarly, with generally synchronized and subsequent peaks of developmental stages of spathes that started in May and finished in September. In contrast, we saw sites within Great Bay proper with much less defined synchrony, as well as developmental stages that occurred much later in the season, stretching from June to the end of October. Mature seeds clearly peaked at the coastal sites during the beginning of August with generally higher numbers per shoot than Great Bay sites, while Great Bay sites held relatively lower yet consistent numbers of seeds per shoot throughout the survey period. In order to maximize the amount of viable, developed seeds during harvesting efforts, those efforts should coincide with peaks of both seeds and proportions of Stage 4 spathes at a harvesting site. This study shows that window occurring around late July to early August for both coastal sites, as well as potentially at the NSGNB site. There also appears to be a similar window for the FMI and FPT sites in late September to early October, which may offer an additional harvesting period during the year. However, with noticeably lower numbers of seeds per shoot, it is questionable whether this effort would be worthwhile. Additionally, with a potential Great Bay harvest occurring later in the fall and with harvested eelgrass shoots needing multiple weeks of outdoor storage before processing, the comfort of those needing to do the harvesting and processing in colder temperatures should be considered. Lastly, while not quantified and analyzed as part of this study, the density of eelgrass shoots - and specifically reproductive shoots - within a bed would offer another important parameter in which to decide where the greatest harvesting effort should be focused.
+
+## Appendix A. Data & Code
+
+Data and code used for this study can be found on the following Github repository: <https://github.com/tmattera59/eelgrass>
+
+## References
+
+Calumpong, H. and M. Fonseca. 2001. Seagrass transplantation and other seagrass restoration methods. pp.425–444. In: Short, F.T. and R.G Coles (eds.). *Global Seagrass Research Methods*. Elsevier Science B.V. Amsterdam. 482 pp.
+
+De Cock, A.W.A.M. 1980. Flowering, pollination and fruiting in Zostera marina L. *Aquat. Bot*. 9, 201–220
+
+Dunic, J.C., Brown, C.J., Connolly, R.M., Turschwell, M.P. and Côté, I.M. 2021. Long‐term declines and recovery of meadow area across the world’s seagrass bioregions. *Global Change Biology*, 27(17), pp.4096-4109.
+
+Fonseca, M.S. 1998. Guidelines for the conservation and restoration of seagrasses in the United States and adjacent waters (Vol. 55). US Department of Commerce, National Oceanic and Atmospheric Administration, Coastal Ocean Office.
+
+Lefcheck, J.S., Hughes, B.B., Johnson, A.J., Pfirrmann, B.W., Rasher, D.B., Smyth, A.R., Williams, B.L., Beck, M.W. and Orth, R.J. 2019. Are coastal habitats important nurseries? A meta‐analysis. *Conservation Letters*, 12(4), p.e12645.
+
+Orth, R. J., J. S. Lefcheck, K. S. McGlathery, L. Aoki, M. L. Luckenbach, K. A. Moore, M. P. J. Oreska, R. Snyder, D. J. Wilcox, and B. Lusk. 2020. Restoration of seagrass habitat leads to rapid recovery of coastal ecosystem services. *Sciences Advances* 6(41).
+
+Phillips, R.C. and Backman, T.W. 1983. Phenology and reproductive biology of eelgrass (*Zostera marina L.*) at Bahia Kino, Sea of Cortez, Mexico. *Aqual. Bot.*, 17: 85-90.
+
+Piscataqua Region Estuaries Partnership (PREP). 2023. 2023 State of Our Estuaries. *PREP Reports & Publications*. 467.
+
+R Core Team. 2023. *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>.
+
+Routhier, M., Grizzle, R., Goddard, T., and Ward, K. 2024. Eelgrass Distribution in the Great Bay Estuary and Piscataqua River for 2023 Final Project Report. *PREP Reports & Publications*. 477.
+
+Sandoval-Gil J., A. Alexandre, R. Santos, V.F. Camacho-Ibar. 2016. Nitrogen Uptake and Internal Recycling in Zostera marina Exposed to Oyster Farming: Eelgrass Potential as a Natural Biofilter. *Estuaries and Coasts* 39: 1694–1708.
+
+Short, F.T. and Short, C.A. 1984. The seagrass filter: purification of estuarine and coastal waters. In *The estuary as a filter* (pp. 395-413). Academic Press.
+
+Silberhorn, G.M., Orth, R.J. and Moore, K.A. 1983. Anthesis and seed production in *Zostera marina L.* (eelgrass) from the Chesapeake Bay. *Aquat. Bot.*, 15: 133-144.
+
+Thayer, G.W., Kenworthy, W.J. and Fonseca, M.S. 1984. The ecology of eelgrass meadows of the Atlantic coast: a community profile. Fish and Wildlife Service, US Department of the Interior.
+
+van Katwijk, M.M., A. Thorhaug, N. Marbà, R.J. Orth, C.M. Duarte, G.A. Kendrick, I.H.J. Althuizen, E. Balestri, G. Bernard, M.L. Cambridge, A. Cunha, C. Durance, W. Giesen, Q. Han, S. Hosokawa, W. Kiswara, T. Komatsu, C. Lardicci, K.-S. Lee, A. Meinesz, M. Nakaoka, K.R. O’Brien, E.I. Paling, C. Pickerell, A.M.A. Ransijn, and J.J. Verduin. 2016. Global analysis of seagrass restoration: The importance of large-scale planting. *Journal of Applied Ecology* 53: 567–578.
